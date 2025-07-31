@@ -89,3 +89,7 @@ df <- combined_df %>%
   arrange(desc(half_ppr_points)) %>% 
   # Select only the necessary columns for GitHub project
   select(player, team, pos, standard_points, half_ppr_points, ppr_points)
+
+
+# Write the projections data to the data folder
+write_csv(df, "data/projections_2025_ffanalytics.csv")
