@@ -102,6 +102,10 @@ df <- combined_df %>%
       scoring == "ppr_points" ~ "PPR",
       TRUE ~ scoring
     )
+  ) %>% 
+  # Set factor level
+  mutate(
+    scoring = factor(scoring, levels = c("Standard", "Half-PPR", "PPR"))
   )
 
 
