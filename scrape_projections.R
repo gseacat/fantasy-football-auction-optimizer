@@ -88,7 +88,21 @@ df <- combined_df %>%
   ) %>% 
   arrange(desc(half_ppr_points)) %>% 
   # Select only the necessary columns for GitHub project
-  select(player, team, pos, standard_points, half_ppr_points, ppr_points)
+  select(player, team, pos, standard_points, half_ppr_points, ppr_points) %>% 
+  # Pivot longer so that the format can be joined with auction_data
+  pivot_longer(
+    cols = c(standard_points, half_ppr_points, ppr_points),
+    names_to = "scoring",
+    values_to = "points"
+  ) %>% 
+  mutate(
+    scoring = case_when(
+      scoring == "standard_points" ~ "Standard",
+      scoring == "half_ppr_points" ~ "Half-PPR",
+      scoring == "ppr_points" ~ "PPR",
+      TRUE ~ scoring
+    )
+  )
 
 
 # Write processed projections to /data folder
