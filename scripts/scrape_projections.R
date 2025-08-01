@@ -110,5 +110,5 @@ df <- combined_df %>%
 
 
 # Write the projections data to the data folder
-write_csv(df, "data/projections_2025_ffanalytics.csv")
+write.csv(df, "data/projections_2025_ffanalytics.csv", row.names = FALSE, quote = FALSE)
 
