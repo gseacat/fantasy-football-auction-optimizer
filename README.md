@@ -4,20 +4,21 @@ R script collection to optimize fantasy football auction drafts using projected 
 
 ## 📂 Project Structure
 
+```
 fantasy-football-auction-optimizer/
 ├── data/
 │   ├── projections_2025_ffanalytics.csv
 │   └── auction_values_2025_all.csv
 │
 ├── R/
-│   └── auction_draft_optimizer.R     # Core optimizer function
+│   └── auction_draft_optimizer.R         # Core optimizer function
 │
 ├── scripts/
-│   └── scrape_projections.R          # Script to scrape projections
+│   └── scrape_projections.R             # Script to scrape projections
 │
-├── example_usage.R                   # Sample usage of the optimizer
-└── README.md # This file
-
+├── example_usage.R                      # Sample usage of the optimizer
+└── README.md                            # This file
+```
 
 ## 🚀 How to Use
 
@@ -28,7 +29,7 @@ fantasy-football-auction-optimizer/
    It's recommended to open this folder as an RStudio project for easy file management and sourcing.
 
 3. **Run projection scrapes**  
-   Open `scrape_projections.R` and click “Source” in RStudio to generate fantasy projections.
+   Open `scripts/scrape_projections.R` and click “Source” in RStudio to generate fantasy projections.
 
 4. **Edit and run the optimizer**  
    Open `example_usage.R`, adjust the parameters (budget, roster size, scoring format, etc.), and run the script.
