@@ -34,16 +34,21 @@ adjust_top_values <- function(data, position, top_n = 5, multiplier = 1.5) {
     group_by(scoring, pos) %>%
     arrange(desc(points), .by_group = TRUE) %>%
     mutate(value = if_else(pos == position & row_number() <= top_n,
-                           value * multiplier,
+                           round(value * multiplier, digits = 0),
                            value)) %>%
     ungroup()
   return(data)
 }
 
 # Apply 50% increase to top 5 RB's and 25% increase to top 5 WR's
-auction_data <- auction_data %>%
+auction_data_values_adjusted <- auction_data %>%
+  filter(scoring == "Half-PPR", teams == 12) %>% 
   adjust_top_values("RB", top_n = 5, multiplier = 1.5) %>%
-  adjust_top_values("WR", top_n = 5, multiplier = 1.25)
+  adjust_top_values("WR", top_n = 5, multiplier = 1.25) %>%
+  arrange(desc(points))
+
+check <- auction_data_values_adjusted %>% 
+  filter(pos == "RB")
 
 # Define draft and roster settings
 total_roster_size <- 16         # Full roster including bench, K, DST
@@ -62,7 +67,7 @@ message(glue::glue(
 
 # Define and run optimizer
 result <- optimize_auction_roster(
-  data = auction_data,
+  data = auction_data_values_adjusted,
   budget = available_budget,
   roster_size = 7,
   teams = 12,
